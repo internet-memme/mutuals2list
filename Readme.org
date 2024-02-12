@@ -11,18 +11,19 @@ This python script lets you create a list of all your mutuals (people you follow
    #+end_src
   
 2. Install the dependencies found in [[file:req.txt][req.txt]]. This can be done with pip. You might want to setup a virtual environment first.
-#+begin_src shell
-  python3 -m venv .
-  source bin/activate
-  pip install -r req.txt
-#+end_src
+   #+begin_src shell
+     python3 -m venv .
+     source bin/activate
+     pip install -r req.txt
+   #+end_src
 
 3. Setup environment variables. The script reads your account details from environment variables. You need to set these accordingly:
    #+begin_example
-   MASTODON_API_URL
-   USERNAME
-   PASSWORD
+     MASTODON_API_URL #eg. https://mastodon.social
+     USERNAME
+     PASSWORD
    #+end_example
+   
 4. Run the script
    #+begin_src shell
      ./mutuals2list.py
