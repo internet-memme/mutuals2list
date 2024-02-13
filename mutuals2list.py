@@ -2,6 +2,7 @@
 
 from mastodon import Mastodon
 from mastodon.errors import MastodonIllegalArgumentError
+from dotenv import load_dotenv
 import os
 
 CLIENT_ID = 'mutuals2list'
@@ -59,11 +60,13 @@ def follow_mutulals(client, mutuals):
 
 
 try:
+    load_dotenv()
     MASTODON_API_URL = os.environ['MASTODON_API_URL']
     USERNAME = os.environ['USERNAME']
     PASSWORD = os.environ['PASSWORD']
 except:
     print('could not read necessary environment variables')
+    exit(0)
 
 create_client_secret()
 client = login()
