@@ -31,6 +31,22 @@ def login():
     print('login successful')
     return m
 
+def get_all_following(client):
+    #we get max 80 followers at a time so we have to loop until we get no more
+    client_id = client.me()['id']
+    following = [x['id'] for x in
+                 client.fetch_remaining(client.account_following(client_id,
+                                                                 limit=80))]
+    return following
+
+
+def get_all_followers(client):
+    client_id = client.me()['id']
+    followers = [x['id'] for x in
+                 client.fetch_remaining(client.account_followers(client_id,
+                                                                 limit=80))]
+    return followers
+
 def follow_mutulals(client, mutuals):
     lists = client.lists()
     mutuals_list = next(x for x in lists if x['title'] == 'mutuals')
@@ -52,9 +68,7 @@ except:
 create_client_secret()
 client = login()
 client_id = client.me()['id']
-follower_ids = [follower['id'] for follower
-                in client.account_followers(client_id)]
-following_ids = [following['id'] for following
-                 in client.account_following(client_id)]
+following_ids = get_all_following(client)
+follower_ids = get_all_followers(client)
 mutuals = list(set(follower_ids) & set(following_ids))
 follow_mutulals(client, mutuals)
